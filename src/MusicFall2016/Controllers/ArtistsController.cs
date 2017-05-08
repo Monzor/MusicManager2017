@@ -4,6 +4,7 @@ using MusicManager2017.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 //First Commit
@@ -91,6 +92,7 @@ namespace MusicManager2017.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ArtistID,Name,Bio")] Artist artist)
         {
             if (id != artist.ArtistID)
