@@ -10,7 +10,7 @@ namespace MusicManager2017.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public String FavoriteGenreName { get; set; }
+       
     }
 
 }
