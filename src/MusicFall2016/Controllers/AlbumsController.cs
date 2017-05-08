@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MusicManager2017.Controllers
 {
@@ -75,7 +76,7 @@ namespace MusicManager2017.Controllers
             }
             return View(await albums.AsNoTracking().ToListAsync());
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             ViewBag.ArtistList = new SelectList(_context.Artists, "ArtistID", "Name");
@@ -83,6 +84,8 @@ namespace MusicManager2017.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Create(Album album, string newArtist, string newGenre)
         {
             
@@ -133,7 +136,7 @@ namespace MusicManager2017.Controllers
             ViewBag.GenreList = new SelectList(_context.Genres, "GenreID", "Name");
             return View();
         }
-
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             ViewBag.ArtistList = new SelectList(_context.Artists, "ArtistID", "Name");
@@ -154,6 +157,7 @@ namespace MusicManager2017.Controllers
         //commit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("AlbumID,Title,Price,ArtistID,Artist,GenreID,Genre")] Album album)
         {
             ViewBag.ArtistList = new SelectList(_context.Artists, "ArtistID", "Name");
@@ -171,7 +175,7 @@ namespace MusicManager2017.Controllers
             }
             return View(album);
         }
-
+        [Authorize]
         public IActionResult Delete(int? id)
         {
 
@@ -191,6 +195,8 @@ namespace MusicManager2017.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Delete(Album album)
         {
             _context.Albums.Remove(album);

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace MusicManager2017.Models
 {
-    public class MusicDbContext : DbContext
+    public class MusicDbContext : IdentityDbContext<ApplicationUser>
     {
         public MusicDbContext(DbContextOptions<MusicDbContext> options) 
             : base(options)
