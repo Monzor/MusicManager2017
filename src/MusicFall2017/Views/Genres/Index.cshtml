@@ -1,0 +1,22 @@
+﻿@model IEnumerable<MusicManager2017.Models.Genre>
+@{
+    ViewData["Title"] = "Genres";
+}
+<h2>Genre List</h2>
+<a class="btn btn-sm btn-danger" href="/Genres/Create" style="background-color:black;">Add a genre</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    @foreach (var genre in Model)
+    {
+        <tr>
+            <td>
+                <a asp-action="AlbumList" asp-route-id="@genre.GenreID">@genre.Name</a>
+            </td>
+        </tr>
+    }
+    </table>
+
